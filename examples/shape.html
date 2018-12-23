@@ -14,12 +14,36 @@
   <script>
     var svg = d3.select('svg')
 
-    var x = d3.scaleLinear()
+    var x1 = d3.scaleLinear()
       .domain([0, 1])
       .range([0, 500])
     svg.append('g')
       .attr('transform', 'translate(30, 30)')
-      .call(d3.axisTop(x))
+      .call(d3.axisTop(x1))
+
+
+    var x2 = d3.scaleLinear()
+      .domain([1, 10])
+      .range([0, 300])
+    svg.append('g')
+      .attr('transform', 'translate(30, 30)')
+      .call(d3.axisLeft(x2))
+
+    var x3 = d3.scaleLinear()
+      .domain([10, 20])
+      .range([0, 500])
+
+    svg.append('g')
+      .attr('transform', 'translate(30, 330)')
+      .call(d3.axisBottom(x3))
+
+    var x4 = d3.scaleLinear()
+      .domain([1, 10])
+      .range([0, 300])
+
+    svg.append('g')
+      .attr('transform', 'translate(530, 30)')
+      .call(d3.axisRight(x4))
   </script>
 </body>
 
