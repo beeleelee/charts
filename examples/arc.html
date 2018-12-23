@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>shape</title>
+  <title>arc</title>
   <script src="d3/d3.js"></script>
 </head>
 
@@ -30,7 +30,7 @@
     var colorScale = d3.scaleSequential()
       .domain([0, 10])
       .interpolator(d3.interpolateRainbow);
-    svg.append('g')
+    var sectors = svg.append('g')
       .attr('transform', 'translate(300,200)')
       .attr('fill', 'blue')
       .selectAll('.arc')
@@ -39,6 +39,17 @@
       .append('path')
       .attr('d', d3.arc().innerRadius(20).outerRadius(50))
       .attr('fill', d => colorScale(d.value))
+      .attr('id', d => `arc_${d.value}`)
+
+    sectors
+      .on('mouseenter', (d, k) => {
+        d3.select(`#arc_${d.value}`)
+          .style('transform', 'scale(1.1)')
+      })
+      .on('mouseleave', (d, k) => {
+        d3.select(`#arc_${d.value}`)
+          .style('transform', 'scale(1)')
+      })
   </script>
 </body>
 
