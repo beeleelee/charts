@@ -25,6 +25,20 @@
     g.append('path')
       .style('fill', 'green')
       .attr('d', arc1())
+
+    var data = [2, 4, 6, 8, 10]
+    var colorScale = d3.scaleSequential()
+      .domain([0, 10])
+      .interpolator(d3.interpolateRainbow);
+    svg.append('g')
+      .attr('transform', 'translate(300,200)')
+      .attr('fill', 'blue')
+      .selectAll('.arc')
+      .data(d3.pie()(data))
+      .enter()
+      .append('path')
+      .attr('d', d3.arc().innerRadius(20).outerRadius(50))
+      .attr('fill', d => colorScale(d.value))
   </script>
 </body>
 
