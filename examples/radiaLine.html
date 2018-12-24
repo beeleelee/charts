@@ -15,7 +15,7 @@
     var body = d3.select('body')
     var svg = d3.select('svg')
 
-    var labels = ['A', 'B', 'C', 'D', 'E']
+    var labels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M']
     var bandScale = d3.scaleBand()
       .domain(labels)
       .range([0, 2 * Math.PI])
@@ -47,6 +47,19 @@
       .append('path')
       .attr('d', data => {
         return radialLine(data)
+      })
+
+    g.append('g')
+      .selectAll('line')
+      .data(labels)
+      .enter()
+      .append('line')
+      .attr('stroke', 'red')
+      .attr('x2', 250)
+      .attr('transform', d => {
+        let deg = bandScale(d)
+        let angle = deg * 180 / Math.PI - 90
+        return `rotate(${angle})`
       })
   </script>
 </body>
