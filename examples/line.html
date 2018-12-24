@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>arc</title>
+  <script src="d3/d3.js"></script>
+</head>
+
+<body>
+  <svg width="900" height="600"></svg>
+  <script>
+    var body = d3.select('body')
+    var svg = d3.select('svg')
+
+    var xScale = d3.scaleLinear().domain([0, 6]).range([0, 600]);
+    var yScale = d3.scaleLinear().domain([0, 80]).range([150, 0]);
+
+    var lineGenerator = d3.line()
+      .x(function (d, i) {
+        return xScale(i);
+      })
+      .y(function (d) {
+        return yScale(d.value);
+      });
+
+    var data = [
+      { value: 10 },
+      { value: 50 },
+      { value: 30 },
+      { value: 40 },
+      { value: 20 },
+      { value: 70 },
+      { value: 50 }
+    ];
+
+    var line = lineGenerator(data);
+
+    // Create a path element and set its d attribute
+    svg.append('g')
+      .append('path')
+      .attr('fill', 'none')
+      .attr('stroke', 'black')
+      .attr('d', line);
+  </script>
+</body>
+
+</html>
