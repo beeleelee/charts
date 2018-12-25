@@ -47,7 +47,17 @@
     var scene = d3.select('g')
       .attr('transform', 'translate(50, 50)')
 
+    var bottomAxisScale = d3.scaleLinear().domain([0, 400]).range([0, 400])
+    var leftAxisScale = d3.scaleLinear().domain([0, 200]).range([200, 0])
+
+    scene.append('g')
+      .attr('transform', 'translate(0, 200)')
+      .call(d3.axisBottom(bottomAxisScale))
+    scene.append('g')
+      .call(d3.axisLeft(leftAxisScale).ticks(5))
+
     scene
+      .append('g')
       .selectAll('path')
       .data(stackedSeries)
       .enter()
@@ -55,9 +65,11 @@
       .style('fill', function (d, i) {
         return colors[i];
       })
+      .attr('fill-opacity', 0.5)
       .attr('d', areaGenerator)
 
     scene
+      .append('g')
       .selectAll('g')
       .data(stackedSeries)
       .enter()
@@ -68,18 +80,11 @@
       .append('circle')
       .attr('cx', (d, i) => i * 100)
       .attr('cy', d => yScale(d[1]))
-      .attr('r', 2)
+      .attr('r', 1.5)
       .attr('stroke', 'black')
       .attr('fill', 'white')
 
-    var bottomAxisScale = d3.scaleLinear().domain([0, 400]).range([0, 400])
-    var leftAxisScale = d3.scaleLinear().domain([0, 200]).range([200, 0])
 
-    scene.append('g')
-      .attr('transform', 'translate(0, 200)')
-      .call(d3.axisBottom(bottomAxisScale))
-    scene.append('g')
-      .call(d3.axisLeft(leftAxisScale).ticks(5))
   </script>
 </body>
 
