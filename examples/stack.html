@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+  <title>Stack generator</title>
+</head>
+
+<style>
+</style>
+
+<body>
+  <svg width="700" height="500">
+    <g></g>
+  </svg>
+
+  <script src="d3/d3.js"></script>
+  <script>
+    var yScale = d3.scaleLinear().domain([0, 600]).range([200, 0]);
+
+    var areaGenerator = d3.area()
+      .x(function (d, i) {
+        return i * 100;
+      })
+      .y0(function (d) {
+        return yScale(d[0]);
+      })
+      .y1(function (d) {
+        return yScale(d[1]);
+      })
+      .curve(d3.curveCardinal)
+
+    var colors = ['#FBB65B', '#513551', '#de3163'];
+
+    var data = [
+      { day: 'Mon', apricots: 120, blueberries: 180, cherries: 100 },
+      { day: 'Tue', apricots: 60, blueberries: 185, cherries: 105 },
+      { day: 'Wed', apricots: 100, blueberries: 215, cherries: 110 },
+      { day: 'Thu', apricots: 80, blueberries: 230, cherries: 105 },
+      { day: 'Fri', apricots: 120, blueberries: 240, cherries: 105 }
+    ];
+
+    var stack = d3.stack()
+      .keys(['apricots', 'blueberries', 'cherries']);
+
+    var stackedSeries = stack(data);
+    console.log(stackedSeries)
+    var scene = d3.select('g')
+      .attr('transform', 'translate(50, 50)')
+
+    scene
+      .selectAll('path')
+      .data(stackedSeries)
+      .enter()
+      .append('path')
+      .style('fill', function (d, i) {
+        return colors[i];
+      })
+      .attr('d', areaGenerator)
+
+    scene
+      .selectAll('g')
+      .data(stackedSeries)
+      .enter()
+      .append('g')
+      .selectAll('circle')
+      .data(d => d)
+      .enter()
+      .append('circle')
+      .attr('cx', (d, i) => i * 100)
+      .attr('cy', d => yScale(d[1]))
+      .attr('r', 2)
+      .attr('stroke', 'black')
+      .attr('fill', 'white')
+
+  </script>
+</body>
+
+</html>
