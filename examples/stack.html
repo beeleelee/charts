@@ -52,10 +52,30 @@
 
     scene.append('g')
       .attr('transform', 'translate(0, 200)')
+      .attr('class', 'bottom-axis')
       .call(d3.axisBottom(bottomAxisScale))
     scene.append('g')
+      .attr('class', 'left-axis')
       .call(d3.axisLeft(leftAxisScale).ticks(5))
-
+    // draw grid
+    d3.select('.bottom-axis')
+      .selectAll('.tick')
+      .filter((d, i) => {
+        return i > 0
+      })
+      .append('line')
+      .attr('y2', -200)
+      .attr('stroke-dasharray', '5, 3')
+      .attr('stroke', '#aeaeae')
+    d3.select('.left-axis')
+      .selectAll('.tick')
+      .filter((d, i) => {
+        return i > 0
+      })
+      .append('line')
+      .attr('x2', 400)
+      .attr('stroke-dasharray', '5, 3')
+      .attr('stroke', '#aeaeae')
     scene
       .append('g')
       .selectAll('path')
