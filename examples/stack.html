@@ -72,6 +72,14 @@
       .attr('stroke', 'black')
       .attr('fill', 'white')
 
+    var bottomAxisScale = d3.scaleLinear().domain([0, 400]).range([0, 400])
+    var leftAxisScale = d3.scaleLinear().domain([0, 200]).range([200, 0])
+
+    scene.append('g')
+      .attr('transform', 'translate(0, 200)')
+      .call(d3.axisBottom(bottomAxisScale))
+    scene.append('g')
+      .call(d3.axisLeft(leftAxisScale).ticks(5))
   </script>
 </body>
 
