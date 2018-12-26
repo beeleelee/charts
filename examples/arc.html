@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>arc</title>
   <script src="d3/d3.js"></script>
+  <script src="../src/utils.js"></script>
 </head>
 
 <body>
@@ -22,9 +23,20 @@
       .outerRadius(50)
       .startAngle(0)
       .endAngle(3)
+    var values = []
+    for (var i = 0; i < 30; i++) {
+      let endAngle = 3 * ((i + 1) / 30)
+      values.push(pathData(d3.arc(), { innerRadius: 10, outerRadius: 50, startAngle: 0, endAngle }))
+    }
+    console.log(values.join(';'))
     g.append('path')
       .style('fill', 'green')
-      .attr('d', arc1())
+      .append('animate')
+      .attr('attributeName', 'd')
+      .attr('fill', 'freeze')
+      .attr('begin', '0s')
+      .attr('dur', '1s')
+      .attr('values', values.join(';'))
 
     var data = [2, 4, 6, 8, 10]
     var colorScale = d3.scaleSequential()
