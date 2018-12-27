@@ -7,43 +7,55 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>arc</title>
   <script src="d3/d3.js"></script>
+  <script src="../src/utils.js"></script>
 </head>
 
 <body>
   <svg width="900" height="600"></svg>
+  <script src="data.js"></script>
   <script>
     var body = d3.select('body')
     var svg = d3.select('svg')
 
-    var xScale = d3.scaleLinear().domain([0, 6]).range([0, 600]);
-    var yScale = d3.scaleLinear().domain([0, 80]).range([150, 0]);
+    // var xScale = d3.scaleLinear().domain([0, 6]).range([0, 600]);
+    // var yScale = d3.scaleLinear().domain([0, 80]).range([150, 0]);
 
-    var lineGenerator = d3.line()
-      .x(function (d, i) {
-        return xScale(i);
-      })
-      .y(function (d) {
-        return yScale(d.value);
-      });
+    // var lineGenerator = d3.line()
+    //   .x(function (d, i) {
+    //     return xScale(i);
+    //   })
+    //   .y(function (d) {
+    //     return yScale(d.value);
+    //   });
 
-    var data = [
-      { value: 10 },
-      { value: 50 },
-      { value: 30 },
-      { value: 40 },
-      { value: 20 },
-      { value: 70 },
-      { value: 50 }
-    ];
+    // var data = [
+    //   { value: 10 },
+    //   { value: 50 },
+    //   { value: 30 },
+    //   { value: 40 },
+    //   { value: 20 },
+    //   { value: 70 },
+    //   { value: 50 }
+    // ];
 
-    var line = lineGenerator(data);
+    // var line = lineGenerator(data);
 
-    // Create a path element and set its d attribute
-    svg.append('g')
-      .append('path')
-      .attr('fill', 'none')
-      .attr('stroke', 'black')
-      .attr('d', line);
+    // // Create a path element and set its d attribute
+    // svg.append('g')
+    //   .append('path')
+    //   .attr('fill', 'none')
+    //   .attr('stroke', 'black')
+    //   .attr('d', line);
+
+    const width = 900, height = 600, padding = 5
+    const center = {
+      x: width / 2 - padding,
+      y: height / 2 - padding
+    }
+
+    // let stage = svg.append('g').attr('transform', `translate(${center.x}, ${center.y})`)
+
+
   </script>
 </body>
 
