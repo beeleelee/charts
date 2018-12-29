@@ -21,13 +21,13 @@
     var arc1 = d3.arc()
       .innerRadius(10)
       .outerRadius(50)
-      .startAngle(0)
-      .endAngle(3)
+      .startAngle(1)
+      .endAngle(2)
     var values = []
     for (var i = 0; i < 30; i++) {
-      let endAngle = 3 * ((i + 1) / 30)
-      //values.push(pathData(d3.arc(), { innerRadius: 10, outerRadius: 50, startAngle: 0, endAngle }))
-      values.push(PATH.arc({ innerRadius: 10, outerRadius: 50, startAngle: 0, endAngle }))
+      let endAngle = 3 + (3 * ((i + 1) / 30))
+      // values.push(pathData(d3.arc(), { innerRadius: 10, outerRadius: 50, startAngle: 0, endAngle }))
+      values.push(PATH.arc({ innerRadius: 10, outerRadius: 50, startAngle: 3, endAngle }))
     }
     console.log(values.join(';'))
     g.append('path')
@@ -38,6 +38,10 @@
       .attr('begin', '0s')
       .attr('dur', '1s')
       .attr('values', values.join(';'))
+
+    // g.append('path')
+    //   .style('fill', 'green')
+    //   .attr('d', PATH.arc({ innerRadius: 10, outerRadius: 50, startAngle: 2.5 * Math.PI / 2, endAngle: 3 * Math.PI / 2 }))
 
     var data = [2, 4, 6, 8, 10]
     var colorScale = d3.scaleSequential()
