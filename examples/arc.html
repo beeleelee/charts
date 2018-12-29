@@ -19,17 +19,16 @@
     var g = svg.append('g')
       .attr('transform', 'translate(300,60)')
     var arc1 = d3.arc()
-      .innerRadius(10)
+      .innerRadius(20)
       .outerRadius(50)
       .startAngle(1)
       .endAngle(2)
     var values = []
-    for (var i = 0; i < 30; i++) {
-      let endAngle = 3 + (3 * ((i + 1) / 30))
+    for (var i = 0; i < 60; i++) {
+      let endAngle = 0 + (4 * ((i + 1) / 60))
       // values.push(pathData(d3.arc(), { innerRadius: 10, outerRadius: 50, startAngle: 0, endAngle }))
-      values.push(PATH.arc({ innerRadius: 10, outerRadius: 50, startAngle: 3, endAngle }))
+      values.push(PATH.arc({ innerRadius: 20, outerRadius: 50, startAngle: 0, endAngle }))
     }
-    console.log(values.join(';'))
     g.append('path')
       .style('fill', 'green')
       .append('animate')
