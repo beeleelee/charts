@@ -37,6 +37,7 @@ PATH.arc = ({
   }
   let largeArc = (endAngle - startAngle) / angle2Degree > 180 ? 1 : 0
   let innerArcStart, innerArcEnd
+  let path = ''
   if (innerRadius > 0) {
     innerArcStart = {
       x: innerRadius * Math.cos(startAngle),
@@ -46,8 +47,26 @@ PATH.arc = ({
       x: innerRadius * Math.cos(endAngle),
       y: innerRadius * Math.sin(endAngle)
     }
-    return `M${outerArcStart.x},${outerArcStart.y}A${outerRadius},${outerRadius} 0 ${largeArc},1 ${outerArcEnd.x},${outerArcEnd.y}L${innerArcEnd.x},${innerArcEnd.y}A${innerRadius},${innerRadius} 0 ${largeArc},0 ${innerArcStart.x},${innerArcStart.y}Z`
+    // move to outer arc start point 
+    path += `M${outerArcStart.x},${outerArcStart.y}`
+    // draw a arc to outer arc end point
+    path += `A${outerRadius},${outerRadius} 0 ${largeArc},1 ${outerArcEnd.x},${outerArcEnd.y}`
+    // draw a line to inter arc end point 
+    path += `L${innerArcEnd.x},${innerArcEnd.y}`
+    // draw a arc to inter arc start point
+    path += `A${innerRadius},${innerRadius} 0 ${largeArc},0 ${innerArcStart.x},${innerArcStart.y}`
+    // end the path
+    path += 'Z'
+  } else {
+    // move to the origin of circle
+    path += 'M0,0'
+    // draw a line to arc start
+    path += `L${outerArcStart.x},${outerArcStart.y}`
+    // draw a arc to arc end
+    path += `A${outerRadius},${outerRadius} 0 ${largeArc},1 ${outerArcEnd.x},${outerArcEnd.y}`
+    // end path
+    path += 'Z'
   }
 
-  return `M0,0L${outerArcStart.x},${outerArcStart.y}A${outerRadius},${outerRadius} 0 ${largeArc},1 ${outerArcEnd.x},${outerArcEnd.y}Z`
+  return path
 }
