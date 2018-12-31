@@ -70,3 +70,21 @@ PATH.arc = ({
 
   return path
 }
+
+PATH.equilateral = ({
+  radius,
+  startAngle = 0,
+  sidesNum = 3
+}) => {
+  let path = ''
+  let meanAngle = Math.PI / sidesNum
+  for (let i = 0; i < sidesNum - 1; i++) {
+    let action, angle, x, y
+    action = i == 0 ? 'M' : 'L'
+    angle = startAngle + meanAngle * i
+    x = radius * Math.cos(angle)
+    y = radius * Math.sin(angle)
+    path += `${action}${x},${y}`
+  }
+  return path + 'Z'
+}
