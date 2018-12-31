@@ -77,8 +77,8 @@ PATH.equilateral = ({
   sidesNum = 3
 }) => {
   let path = ''
-  let meanAngle = Math.PI / sidesNum
-  for (let i = 0; i < sidesNum - 1; i++) {
+  let meanAngle = 2 * Math.PI / sidesNum
+  for (let i = 0; i < sidesNum; i++) {
     let action, angle, x, y
     action = i == 0 ? 'M' : 'L'
     angle = startAngle + meanAngle * i
