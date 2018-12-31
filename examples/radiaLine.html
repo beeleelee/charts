@@ -46,8 +46,12 @@
 
     radarLines
       .append('path')
-      .attr('d', data => {
-        return radialLine(data)
+      .attr('d', (data, i) => {
+        return PATH.equilateral({
+          radius: 20 * (i + 1),
+          sidesNum: data.length - 1
+        })
+        //return radialLine(data)
       })
 
     g.append('g')
